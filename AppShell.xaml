@@ -3,7 +3,7 @@
     x:Class="Explorer.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Explorer"
+    xmlns:local="clr-namespace:Explorer.Views"
     Shell.FlyoutBehavior="Disabled"
     Title="Explorer">
 

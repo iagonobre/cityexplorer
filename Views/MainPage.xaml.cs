@@ -1,6 +1,6 @@
 ﻿using Explorer.Services;
 
-namespace Explorer;
+namespace Explorer.Views;
 
 public partial class MainPage : ContentPage
 {
@@ -13,26 +13,31 @@ public partial class MainPage : ContentPage
     {
         try
         {
-            var service = new PlacesService();
+            var locationService = new LocationService();
+            var location = await locationService.GetCurrentLocationAsync();
 
-            var places = await service.SearchNearbyAsync(
-                latitude: 59.3293,
-                longitude: 18.0686,
+            if (location == null)
+            {
+                CounterBtn.Text = "Location not available";
+                return;
+            }
+
+            var placesService = new PlacesService();
+
+            var places = await placesService.SearchNearbyAsync(
+                latitude: location.Latitude,
+                longitude: location.Longitude,
                 query: "restaurant"
             );
 
-            if (places.Any())
-            {
-                CounterBtn.Text = places.First().Name;
-            }
-            else
-            {
-                CounterBtn.Text = "No places found";
-            }
+            CounterBtn.Text = places.Any()
+                ? places.First().Name
+                : "No places found";
         }
         catch (Exception ex)
         {
-            CounterBtn.Text = "Error";
+            CounterBtn.Text = ex.GetType().Name;
+            await DisplayAlert("Error", ex.ToString(), "OK");
             Console.WriteLine(ex);
         }
     }

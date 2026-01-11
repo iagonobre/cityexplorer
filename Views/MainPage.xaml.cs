@@ -1,23 +1,39 @@
-﻿namespace Explorer;
+﻿using Explorer.Services;
+
+namespace Explorer;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
-
     public MainPage()
     {
         InitializeComponent();
     }
 
-    private void OnCounterClicked(object sender, EventArgs e)
+    private async void OnCounterClicked(object sender, EventArgs e)
     {
-        count++;
+        try
+        {
+            var service = new PlacesService();
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
+            var places = await service.SearchNearbyAsync(
+                latitude: 59.3293,
+                longitude: 18.0686,
+                query: "restaurant"
+            );
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+            if (places.Any())
+            {
+                CounterBtn.Text = places.First().Name;
+            }
+            else
+            {
+                CounterBtn.Text = "No places found";
+            }
+        }
+        catch (Exception ex)
+        {
+            CounterBtn.Text = "Error";
+            Console.WriteLine(ex);
+        }
     }
 }

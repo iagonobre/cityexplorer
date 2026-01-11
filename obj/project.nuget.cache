@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ewS9/qL4cNo=",
+  "dgSpecHash": "SixqWwMNBr0=",
   "success": true,
   "projectFilePath": "/Users/iagonobre/RiderProjects/Explorer/Explorer.csproj",
   "expectedPackageFiles": [
@@ -27,6 +27,7 @@
     "/Users/iagonobre/.nuget/packages/microsoft.maui.graphics/8.0.100/microsoft.maui.graphics.8.0.100.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/microsoft.maui.resizetizer/8.0.100/microsoft.maui.resizetizer.8.0.100.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/microsoft.net.illink.tasks/8.0.22/microsoft.net.illink.tasks.8.0.22.nupkg.sha512",
+    "/Users/iagonobre/.nuget/packages/refit/9.0.2/refit.9.0.2.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/xamarin.android.glide/4.15.1.2/xamarin.android.glide.4.15.1.2.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/xamarin.android.glide.annotations/4.15.1.2/xamarin.android.glide.annotations.4.15.1.2.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/xamarin.android.glide.disklrucache/4.15.1.2/xamarin.android.glide.disklrucache.4.15.1.2.nupkg.sha512",

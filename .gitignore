@@ -1,0 +1,66 @@
+# ================================
+# .NET / Visual Studio / Rider
+# ================================
+
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+
+# Rider
+.idea/
+*.sln.iml
+
+# ================================
+# .NET MAUI / Xamarin
+# ================================
+
+# Android
+**/android/bin/
+**/android/obj/
+*.apk
+*.aab
+
+# iOS / MacCatalyst
+**/ios/bin/
+**/ios/obj/
+**/*.app
+**/*.dSYM
+
+# MAUI build artifacts
+*.ipa
+
+# ================================
+# macOS
+# ================================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ================================
+# Logs
+# ================================
+
+*.log
+
+# ================================
+# NuGet
+# ================================
+
+.nuget/
+packages/
+
+# ================================
+# Environment / secrets
+# ================================
+
+.env
+.env.*
+secrets.json
+appsettings.Development.json

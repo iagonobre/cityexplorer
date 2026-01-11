@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "soVLTSPYQLQ=",
+  "dgSpecHash": "ewS9/qL4cNo=",
   "success": true,
   "projectFilePath": "/Users/iagonobre/RiderProjects/Explorer/Explorer.csproj",
   "expectedPackageFiles": [
+    "/Users/iagonobre/.nuget/packages/communitytoolkit.maui/9.1.1/communitytoolkit.maui.9.1.1.nupkg.sha512",
+    "/Users/iagonobre/.nuget/packages/communitytoolkit.maui.core/9.1.1/communitytoolkit.maui.core.9.1.1.nupkg.sha512",
+    "/Users/iagonobre/.nuget/packages/communitytoolkit.mvvm/8.4.0/communitytoolkit.mvvm.8.4.0.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/googlegson/2.10.1.4/googlegson.2.10.1.4.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/microsoft.extensions.configuration/8.0.0/microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "/Users/iagonobre/.nuget/packages/microsoft.extensions.configuration.abstractions/8.0.0/microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

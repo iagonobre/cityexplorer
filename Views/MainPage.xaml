@@ -1,35 +1,95 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Explorer.Views.MainPage">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Explorer.Views.MainPage"
+    Title="Explorer">
 
     <ScrollView>
         <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Image
-                Source="dotnet_bot.png"
-                HeightRequest="185"
-                Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a race car number eight" />
-
+            Margin="20,40,20,20"
+            Spacing="16">
+            
             <Label
-                Text="Hello, World!"
-                Style="{StaticResource Headline}"
-                SemanticProperties.HeadingLevel="Level1" />
-
+                Text="Nearby Restaurants"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalTextAlignment="Center" />
+            
             <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
-                Style="{StaticResource SubHeadline}"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                Text="{Binding DetectedLocationInfo}"
+                FontSize="14"
+                TextColor="Gray"
+                HorizontalTextAlignment="Center" />
+            
+            <Border
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}"
+                Margin="0,10">
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Fill" />
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="14" />
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Padding="8" Spacing="8">
+
+                    <SearchBar
+                        Placeholder="Search restaurants by name"
+                        Text="{Binding SearchText}"
+                        BackgroundColor="Transparent" />
+
+                </VerticalStackLayout>
+            </Border>
+            
+            <Label
+                Text="{Binding EmptyMessage}"
+                FontSize="14"
+                TextColor="Gray"
+                HorizontalTextAlignment="Center" />
+
+            
+            <CollectionView
+                ItemsSource="{Binding Places}"
+                SelectionMode="Single"
+                SelectionChanged="OnPlaceSelected">
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border
+                            Margin="0,6"
+                            BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="14" />
+                            </Border.StrokeShape>
+
+                            <VerticalStackLayout
+                                Padding="14"
+                                Spacing="6">
+                                
+                                <Label
+                                    Text="{Binding Name}"
+                                    FontSize="18"
+                                    FontAttributes="Bold" />
+
+                                <Label
+                                    Text="{Binding Address}"
+                                    FontSize="14"
+                                    TextColor="Gray"
+                                    LineBreakMode="TailTruncation"
+                                    MaxLines="2" />
+
+                                <Label
+                                    Text="{Binding DistanceKm, StringFormat='{0:F1} km away'}"
+                                    FontSize="12"
+                                    TextColor="Gray" />
+
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

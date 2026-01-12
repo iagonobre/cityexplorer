@@ -1,4 +1,5 @@
-﻿using Explorer.Services;
+﻿using Explorer.Models;
+using Explorer.ViewModels;
 
 namespace Explorer.Views;
 
@@ -7,38 +8,25 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+        BindingContext = new MainViewModel();
     }
 
-    private async void OnCounterClicked(object sender, EventArgs e)
+    private async void OnPlaceSelected(object sender, SelectionChangedEventArgs e)
     {
-        try
-        {
-            var locationService = new LocationService();
-            var location = await locationService.GetCurrentLocationAsync();
+        if (e.CurrentSelection.FirstOrDefault() is not Place place)
+            return;
 
-            if (location == null)
-            {
-                CounterBtn.Text = "Location not available";
-                return;
-            }
+        ((CollectionView)sender).SelectedItem = null;
 
-            var placesService = new PlacesService();
+        await Shell.Current.GoToAsync(
+            $"map?" +
+            $"lat={place.Latitude}" +
+            $"&lon={place.Longitude}" +
+            $"&name={Uri.EscapeDataString(place.Name)}" +
+            $"&address={Uri.EscapeDataString(place.Address)}" +
+            $"&distance={place.DistanceKm}"
+        );
 
-            var places = await placesService.SearchNearbyAsync(
-                latitude: location.Latitude,
-                longitude: location.Longitude,
-                query: "restaurant"
-            );
-
-            CounterBtn.Text = places.Any()
-                ? places.First().Name
-                : "No places found";
-        }
-        catch (Exception ex)
-        {
-            CounterBtn.Text = ex.GetType().Name;
-            await DisplayAlert("Error", ex.ToString(), "OK");
-            Console.WriteLine(ex);
-        }
     }
 }

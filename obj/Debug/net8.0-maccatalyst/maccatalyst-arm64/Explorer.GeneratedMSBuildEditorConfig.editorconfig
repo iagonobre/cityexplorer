@@ -51,3 +51,9 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Explorer.Views.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/MainPage.xaml
+
+[/Users/iagonobre/RiderProjects/Explorer/Views/MapPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Explorer.Views.MapPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/MapPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/MapPage.xaml

@@ -10,7 +10,7 @@ public interface INominatimApi
         [AliasAs("q")] string query,
         [AliasAs("format")] string format,
         [AliasAs("limit")] int limit,
-        [AliasAs("lat")] double latitude,
-        [AliasAs("lon")] double longitude
+        [AliasAs("viewbox")] string viewbox,
+        [AliasAs("bounded")] int bounded
     );
 }

@@ -25,18 +25,28 @@ public class PlacesService
     }
 
     public async Task<List<Place>> SearchNearbyAsync(
-        double latitude,
-        double longitude,
+        double userLatitude,
+        double userLongitude,
         string query,
         int limit = 20
     )
     {
+        var latOffset = 0.05;
+        var lonOffset = 0.05;
+
+        var left = userLongitude - lonOffset;
+        var right = userLongitude + lonOffset;
+        var top = userLatitude + latOffset;
+        var bottom = userLatitude - latOffset;
+
+        var viewbox = $"{left},{top},{right},{bottom}";
+
         var dtoList = await _api.SearchAsync(
             query: query,
             format: "json",
             limit: limit,
-            latitude: latitude,
-            longitude: longitude
+            viewbox: viewbox,
+            bounded: 1
         );
 
         var places = new List<Place>();
@@ -49,27 +59,58 @@ public class PlacesService
             if (!double.TryParse(dto.Longitude, NumberStyles.Any, CultureInfo.InvariantCulture, out var lon))
                 continue;
 
-            var place = new Place
+            var distanceKm = CalculateDistanceKm(
+                userLatitude,
+                userLongitude,
+                lat,
+                lon
+            );
+
+            places.Add(new Place
             {
                 Name = ExtractName(dto.DisplayName),
                 Address = dto.DisplayName,
-                Type = dto.Type,
                 Latitude = lat,
-                Longitude = lon
-            };
-
-            places.Add(place);
+                Longitude = lon,
+                DistanceKm = distanceKm
+            });
         }
 
-        return places;
+        return places
+            .OrderBy(p => p.DistanceKm)
+            .ToList();
     }
 
-    private string ExtractName(string displayName)
+    private static double CalculateDistanceKm(
+        double lat1,
+        double lon1,
+        double lat2,
+        double lon2
+    )
+    {
+        const double R = 6371;
+
+        var dLat = DegreesToRadians(lat2 - lat1);
+        var dLon = DegreesToRadians(lon2 - lon1);
+
+        var a =
+            Math.Sin(dLat / 2) * Math.Sin(dLat / 2) +
+            Math.Cos(DegreesToRadians(lat1)) *
+            Math.Cos(DegreesToRadians(lat2)) *
+            Math.Sin(dLon / 2) * Math.Sin(dLon / 2);
+
+        var c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+        return R * c;
+    }
+
+    private static double DegreesToRadians(double degrees)
+        => degrees * (Math.PI / 180);
+
+    private static string ExtractName(string displayName)
     {
         if (string.IsNullOrWhiteSpace(displayName))
             return string.Empty;
 
-        var parts = displayName.Split(',');
-        return parts.Length > 0 ? parts[0] : displayName;
+        return displayName.Split(',')[0];
     }
 }

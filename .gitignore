@@ -62,5 +62,7 @@ packages/
 
 secrets.json
 appsettings.Development.json
-config.bat
 node_modules
+
+.env
+.env.*
